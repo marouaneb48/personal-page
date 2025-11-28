@@ -276,12 +276,10 @@ function populateContactSection() {
         contactInfo.innerHTML = `
             <h3>Contact Information</h3>
             <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
+                <i class="fas fa-envelope"></i>
                 <div>
-                    <h4>Office</h4>
-                    <p>${personalData.contact.office.building}<br>
-                    ${personalData.contact.office.university}<br>
-                    ${personalData.contact.office.address}</p>
+                    <h4>Email</h4>
+                    <p><a href="mailto:${personalData.contact.email}" style="color: inherit; text-decoration: none;">${personalData.contact.email}</a></p>
                 </div>
             </div>
         `;

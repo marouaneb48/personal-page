@@ -66,7 +66,7 @@
     }
   ],
   "contact": {
-    "email": "marouane.battach@centralesupelec.fr",
+    "email": "marouane.battach@gmail.com",
     "office": {
       "building": "Laboratoire des signaux et systèmes (L2S)",
       "university": "CentraleSupélec, Université Paris-Saclay",
@@ -77,7 +77,7 @@
     {
       "platform": "Email",
       "icon": "fas fa-envelope",
-      "url": "mailto:marouane.battach@centralesupelec.fr"
+      "url": "mailto:marouane.battach@gmail.com"
     },
     {
       "platform": "LinkedIn",
@@ -93,21 +93,6 @@
       "platform": "Google Scholar",
       "icon": "fas fa-graduation-cap",
       "url": "https://scholar.google.com/citations?user=YOUR_ID"
-    },
-    {
-      "platform": "ORCID",
-      "icon": "fab fa-orcid",
-      "url": "https://orcid.org/YOUR_ORCID"
-    },
-    {
-      "platform": "ResearchGate",
-      "icon": "fab fa-researchgate",
-      "url": "https://researchgate.net/profile/Marouane_Battach"
-    },
-    {
-      "platform": "Twitter",
-      "icon": "fab fa-twitter",
-      "url": "https://twitter.com/YOUR_HANDLE"
     }
   ],
   "supervision": [

@@ -188,9 +188,9 @@ body {
 }
 
 .profile-img {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
+    width: 300px;
+    height: auto;
+    border-radius: 10px;
     object-fit: cover;
     box-shadow: var(--shadow);
     transition: var(--transition);
@@ -554,86 +554,39 @@ body {
     font-style: italic;
 }
 
-/* Contact Section */
-.contact {
-    padding: 100px 0;
-    background: var(--light-gray);
-}
 
-.contact-content {
-    display: flex;
-    flex-direction: column;
-    gap: 3rem;
-}
-
-.contact-info {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.contact-info h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 0;
-}
-
-.contact-item i {
-    color: var(--secondary-color);
-    font-size: 1.5rem;
-    margin-top: 0.2rem;
-}
-
-.contact-item h4 {
-    color: var(--primary-color);
-    margin-bottom: 0.5rem;
-}
-
-.social-links {
-    background: white;
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.social-links h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-    text-align: center;
-}
 
 .social-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    justify-content: center;
     gap: 1rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 .social-link {
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    padding: 1rem;
-    background: var(--light-gray);
-    color: var(--text-color);
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    color: var(--primary-color);
     text-decoration: none;
-    border-radius: 10px;
+    box-shadow: var(--shadow);
     transition: var(--transition);
+}
+
+.social-link span {
+    display: none;
+    /* Hide text labels */
 }
 
 .social-link:hover {
     background: var(--secondary-color);
     color: white;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow);
+    transform: translateY(-3px);
 }
 
 .social-link i {
@@ -725,6 +678,11 @@ body {
 
     .project-grid {
         grid-template-columns: 1fr;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .social-grid {
