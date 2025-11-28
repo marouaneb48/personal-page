@@ -22,19 +22,19 @@ document.addEventListener('DOMContentLoaded', async () => {
 async function loadAllData() {
     try {
         const [personal, publications, courses, projects] = await Promise.all([
-            fetch('data/personal.json?v='+ new Date().getTime()).then(response => {
+            fetch('data/personal.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load personal data: ${response.status}`);
                 return response.json();
             }),
-            fetch('data/publications.json?v='+ new Date().getTime()).then(response => {
+            fetch('data/publications.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load publications data: ${response.status}`);
                 return response.json();
             }),
-            fetch('data/courses.json?v='+ new Date().getTime()).then(response => {
+            fetch('data/courses.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load courses data: ${response.status}`);
                 return response.json();
             }),
-            fetch('data/projects.json?v='+ new Date().getTime()).then(response => {
+            fetch('data/projects.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load projects data: ${response.status}`);
                 return response.json();
             })
@@ -64,98 +64,112 @@ function populateContent() {
 function populatePersonalInfo() {
     // Page title and meta
     document.title = `${personalData.name} - ${personalData.title}`;
-    document.getElementById('page-description').content = `${personalData.name} - ${personalData.title}. ${personalData.heroSubtitle}`;
+    const pageDesc = document.getElementById('page-description');
+    if (pageDesc) pageDesc.content = `${personalData.name} - ${personalData.title}. ${personalData.heroSubtitle}`;
 
     // Navigation
-    document.getElementById('nav-name').textContent = personalData.name;
-    document.getElementById('nav-title').textContent = personalData.title;
+    const navName = document.getElementById('nav-name');
+    if (navName) navName.textContent = personalData.name;
+    const navTitle = document.getElementById('nav-title');
+    if (navTitle) navTitle.textContent = personalData.title;
 
     // Hero section
-    document.getElementById('hero-title').textContent = personalData.heroTitle;
-    document.getElementById('hero-subtitle').textContent = personalData.heroSubtitle;
+    const heroTitle = document.getElementById('hero-title');
+    if (heroTitle) heroTitle.textContent = personalData.heroTitle;
+    const heroSubtitle = document.getElementById('hero-subtitle');
+    if (heroSubtitle) heroSubtitle.textContent = personalData.heroSubtitle;
 }
 
 // Populate about section
 function populateAboutSection() {
     // Profile image
     const profileImg = document.getElementById('profile-image');
-    profileImg.alt = personalData.name;
+    if (profileImg) profileImg.alt = personalData.name;
 
     // Bio paragraphs
     const bioContainer = document.getElementById('bio-paragraphs');
-    personalData.bio.forEach(paragraph => {
-        const p = document.createElement('p');
-        p.textContent = paragraph;
-        bioContainer.appendChild(p);
-    });
+    if (bioContainer) {
+        personalData.bio.forEach(paragraph => {
+            const p = document.createElement('p');
+            p.textContent = paragraph;
+            bioContainer.appendChild(p);
+        });
+    }
 
     // Education
     const educationList = document.getElementById('education-list');
-    personalData.education.forEach(edu => {
-        const li = document.createElement('li');
-        li.innerHTML = `<strong>${edu.degree}</strong>, ${edu.institution} (${edu.year})`;
-        educationList.appendChild(li);
-    });
+    if (educationList) {
+        personalData.education.forEach(edu => {
+            const li = document.createElement('li');
+            li.innerHTML = `<strong>${edu.degree}</strong>, ${edu.institution} (${edu.year})`;
+            educationList.appendChild(li);
+        });
+    }
 
     // Quick facts
     const quickFacts = document.getElementById('quick-facts');
-    personalData.quickFacts.forEach(fact => {
-        const factElement = document.createElement('div');
-        factElement.className = 'quick-fact';
-        factElement.innerHTML = `
-            <span class="quick-fact-label">${fact.label}:</span>
-            <span class="quick-fact-value">${fact.value}</span>
-        `;
-        quickFacts.appendChild(factElement);
-    });
+    if (quickFacts) {
+        personalData.quickFacts.forEach(fact => {
+            const factElement = document.createElement('div');
+            factElement.className = 'quick-fact';
+            factElement.innerHTML = `
+                <span class="quick-fact-label">${fact.label}:</span>
+                <span class="quick-fact-value">${fact.value}</span>
+            `;
+            quickFacts.appendChild(factElement);
+        });
+    }
 }
 
 // Populate research section
 function populateResearchSection() {
     // Research interests
     const interestsGrid = document.getElementById('research-interests-grid');
-    personalData.researchInterests.forEach(interest => {
-        const card = document.createElement('div');
-        card.className = 'interest-card';
-        card.innerHTML = `
-            <i class="${interest.icon}"></i>
-            <h4>${interest.title}</h4>
-            <p>${interest.description}</p>
-        `;
-        interestsGrid.appendChild(card);
-    });
+    if (interestsGrid) {
+        personalData.researchInterests.forEach(interest => {
+            const card = document.createElement('div');
+            card.className = 'interest-card';
+            card.innerHTML = `
+                <i class="${interest.icon}"></i>
+                <h4>${interest.title}</h4>
+                <p>${interest.description}</p>
+            `;
+            interestsGrid.appendChild(card);
+        });
+    }
 
     // Publications
     const publicationsList = document.getElementById('publications-list');
-    
-    // Sort publications by year (newest first)
-    const sortedPublications = [...publicationsData].sort((a, b) => b.year - a.year);
-    
-    sortedPublications.forEach(publication => {
-        const pubElement = document.createElement('div');
-        pubElement.className = `publication-item ${publication.featured ? 'featured' : ''}`;
-        
-        // Format authors (highlight current author)
-        const formattedAuthors = publication.authors.map(author => {
-            if (author.includes('Smith')) { // Replace with logic to detect your name
-                return `<strong>${author}</strong>`;
-            }
-            return author;
-        }).join(', ');
+    if (publicationsList) {
+        // Sort publications by year (newest first)
+        const sortedPublications = [...publicationsData].sort((a, b) => b.year - a.year);
 
-        // Create links
-        const linksHTML = publication.links.map(link => 
-            `<a href="${link.url}" class="pub-link" target="_blank">${link.type}</a>`
-        ).join('');
+        sortedPublications.forEach(publication => {
+            const pubElement = document.createElement('div');
+            pubElement.className = `publication-item ${publication.featured ? 'featured' : ''}`;
 
-        pubElement.innerHTML = `
-            <h4>${publication.title}</h4>
-            <p class="authors">${formattedAuthors}</p>
-            <p class="venue">${publication.venue}, ${publication.year}</p>
-            <div class="publication-links">${linksHTML}</div>
-        `;
-        publicationsList.appendChild(pubElement);
-    });
+            // Format authors (highlight current author)
+            const formattedAuthors = publication.authors.map(author => {
+                if (author.includes('Smith')) { // Replace with logic to detect your name
+                    return `<strong>${author}</strong>`;
+                }
+                return author;
+            }).join(', ');
+
+            // Create links
+            const linksHTML = publication.links.map(link =>
+                `<a href="${link.url}" class="pub-link" target="_blank">${link.type}</a>`
+            ).join('');
+
+            pubElement.innerHTML = `
+                <h4>${publication.title}</h4>
+                <p class="authors">${formattedAuthors}</p>
+                <p class="venue">${publication.venue}, ${publication.year}</p>
+                <div class="publication-links">${linksHTML}</div>
+            `;
+            publicationsList.appendChild(pubElement);
+        });
+    }
 }
 
 // Populate teaching section
@@ -164,86 +178,92 @@ function populateTeachingSection() {
     const supervisionStats = document.getElementById('supervision-stats');
 
     // Current courses
-    const currentCourses = coursesData.filter(course => course.status === 'current');
-    currentCourses.forEach(course => {
-        const courseCard = document.createElement('div');
-        courseCard.className = `course-card ${course.status}`;
-        
-        courseCard.innerHTML = `
-            <div class="course-header">
-                <div>
-                    <h4>${course.courseCode}: ${course.title}</h4>
-                    <div class="course-level">${course.level}</div>
+    if (coursesGrid) {
+        const currentCourses = coursesData.filter(course => course.status === 'current');
+        currentCourses.forEach(course => {
+            const courseCard = document.createElement('div');
+            courseCard.className = `course-card ${course.status}`;
+
+            courseCard.innerHTML = `
+                <div class="course-header">
+                    <div>
+                        <h4>${course.courseCode}: ${course.title}</h4>
+                        <div class="course-level">${course.level}</div>
+                    </div>
                 </div>
-            </div>
-            <p class="semester">${course.semester}</p>
-            <p>${course.description}</p>
-            <div class="course-info">
-                <span><i class="fas fa-users"></i> ${course.students} students</span>
-                <span><i class="fas fa-clock"></i> ${course.schedule}</span>
-                <span><i class="fas fa-map-marker-alt"></i> ${course.room}</span>
-            </div>
-        `;
-        coursesGrid.appendChild(courseCard);
-    });
+                <p class="semester">${course.semester}</p>
+                <p>${course.description}</p>
+                <div class="course-info">
+                    <span><i class="fas fa-users"></i> ${course.students} students</span>
+                    <span><i class="fas fa-clock"></i> ${course.schedule}</span>
+                    <span><i class="fas fa-map-marker-alt"></i> ${course.room}</span>
+                </div>
+            `;
+            coursesGrid.appendChild(courseCard);
+        });
+    }
 
     // Supervision statistics
-    personalData.supervision.forEach(stat => {
-        const statCard = document.createElement('div');
-        statCard.className = 'stat-card';
-        statCard.innerHTML = `
-            <div class="stat-number">${stat.count}</div>
-            <div class="stat-label">${stat.type}</div>
-        `;
-        supervisionStats.appendChild(statCard);
-    });
+    if (supervisionStats) {
+        personalData.supervision.forEach(stat => {
+            const statCard = document.createElement('div');
+            statCard.className = 'stat-card';
+            statCard.innerHTML = `
+                <div class="stat-number">${stat.count}</div>
+                <div class="stat-label">${stat.type}</div>
+            `;
+            supervisionStats.appendChild(statCard);
+        });
+    }
 }
 
 // Populate projects section
 function populateProjectsSection() {
     const projectsGrid = document.getElementById('projects-grid');
-    
-    // Sort projects: featured first, then by status (active first)
-    const sortedProjects = [...projectsData].sort((a, b) => {
-        if (a.featured && !b.featured) return -1;
-        if (!a.featured && b.featured) return 1;
-        if (a.status === 'active' && b.status !== 'active') return -1;
-        if (a.status !== 'active' && b.status === 'active') return 1;
-        return 0;
-    });
 
-    sortedProjects.forEach(project => {
-        const projectCard = document.createElement('div');
-        projectCard.className = `project-card ${project.featured ? 'featured' : ''}`;
-        
-        // Create technology tags
-        const techTags = project.technologies.map(tech => 
-            `<span class="tech-tag">${tech}</span>`
-        ).join('');
+    if (projectsGrid) {
+        // Sort projects: featured first, then by status (active first)
+        const sortedProjects = [...projectsData].sort((a, b) => {
+            if (a.featured && !b.featured) return -1;
+            if (!a.featured && b.featured) return 1;
+            if (a.status === 'active' && b.status !== 'active') return -1;
+            if (a.status !== 'active' && b.status === 'active') return 1;
+            return 0;
+        });
 
-        // Create project links
-        const projectLinks = project.links.map(link => 
-            `<a href="${link.url}" class="project-link" target="_blank">
-                <i class="${link.icon}"></i> ${link.type}
-            </a>`
-        ).join('');
+        sortedProjects.forEach(project => {
+            const projectCard = document.createElement('div');
+            projectCard.className = `project-card ${project.featured ? 'featured' : ''}`;
 
-        // Funding information
-        const fundingHTML = project.funding ? 
-            `<div class="project-funding">Funding: ${project.funding}</div>` : '';
+            // Create technology tags
+            const techTags = project.technologies.map(tech =>
+                `<span class="tech-tag">${tech}</span>`
+            ).join('');
 
-        projectCard.innerHTML = `
-            <div class="project-header">
-                <h3>${project.title}</h3>
-                <div class="project-status ${project.status}">${project.status}</div>
-            </div>
-            <p>${project.description}</p>
-            <div class="project-tech">${techTags}</div>
-            ${fundingHTML}
-            <div class="project-links">${projectLinks}</div>
-        `;
-        projectsGrid.appendChild(projectCard);
-    });
+            // Create project links
+            const projectLinks = project.links.map(link =>
+                `<a href="${link.url}" class="project-link" target="_blank">
+                    <i class="${link.icon}"></i> ${link.type}
+                </a>`
+            ).join('');
+
+            // Funding information
+            const fundingHTML = project.funding ?
+                `<div class="project-funding">Funding: ${project.funding}</div>` : '';
+
+            projectCard.innerHTML = `
+                <div class="project-header">
+                    <h3>${project.title}</h3>
+                    <div class="project-status ${project.status}">${project.status}</div>
+                </div>
+                <p>${project.description}</p>
+                <div class="project-tech">${techTags}</div>
+                ${fundingHTML}
+                <div class="project-links">${projectLinks}</div>
+            `;
+            projectsGrid.appendChild(projectCard);
+        });
+    }
 }
 
 // Populate contact section
@@ -252,46 +272,43 @@ function populateContactSection() {
     const socialLinksGrid = document.getElementById('social-links-grid');
 
     // Contact information
-    contactInfo.innerHTML = `
-        <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <div>
-                <h4>Office</h4>
-                <p>${personalData.contact.office.building}<br>
-                ${personalData.contact.office.university}<br>
-                ${personalData.contact.office.address}</p>
+    if (contactInfo) {
+        contactInfo.innerHTML = `
+            <h3>Contact Information</h3>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <div>
+                    <h4>Office</h4>
+                    <p>${personalData.contact.office.building}<br>
+                    ${personalData.contact.office.university}<br>
+                    ${personalData.contact.office.address}</p>
+                </div>
             </div>
-        </div>
-        
-        <div class="contact-item">
-            <i class="fas fa-phone"></i>
-            <div>
-                <h4>Phone</h4>
-                <p><a href="tel:${personalData.contact.phone}">${personalData.contact.phone}</a></p>
-            </div>
-        </div>
-    `;
+        `;
+    }
 
     // Social links
-    personalData.socialLinks.forEach(link => {
-        const socialLink = document.createElement('a');
-        socialLink.href = link.url;
-        socialLink.className = 'social-link';
-        socialLink.target = '_blank';
-        socialLink.rel = 'noopener noreferrer';
-        socialLink.innerHTML = `
-            <i class="${link.icon}"></i>
-            <span>${link.platform}</span>
-        `;
-        socialLinksGrid.appendChild(socialLink);
-    });
+    if (socialLinksGrid) {
+        personalData.socialLinks.forEach(link => {
+            const socialLink = document.createElement('a');
+            socialLink.href = link.url;
+            socialLink.className = 'social-link';
+            socialLink.target = '_blank';
+            socialLink.rel = 'noopener noreferrer';
+            socialLink.innerHTML = `
+                <i class="${link.icon}"></i>
+                <span>${link.platform}</span>
+            `;
+            socialLinksGrid.appendChild(socialLink);
+        });
+    }
 }
 
 // Populate footer
 function populateFooter() {
-    document.getElementById('footer-copyright').textContent = 
+    document.getElementById('footer-copyright').textContent =
         `© 2023 ${personalData.footer.copyright}. All rights reserved.`;
-    document.getElementById('footer-updated').textContent = 
+    document.getElementById('footer-updated').textContent =
         `Last updated: ${personalData.footer.lastUpdated}`;
 }
 
@@ -301,41 +318,30 @@ function initializeNavigation() {
     const navMenu = document.querySelector('.nav-menu');
 
     // Mobile navigation toggle
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        navToggle.classList.toggle('active');
-    });
-
-    // Close mobile menu when clicking on a link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            navToggle.classList.remove('active');
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            navToggle.classList.toggle('active');
         });
-    });
 
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const offsetTop = target.offsetTop - 80; // Account for fixed navbar
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
+                navToggle.classList.remove('active');
+            });
         });
-    });
+    }
 
     // Navbar background opacity on scroll
     window.addEventListener('scroll', () => {
         const navbar = document.querySelector('.navbar');
-        if (window.scrollY > 100) {
-            navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-        } else {
-            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+        if (navbar) {
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
         }
     });
 }
@@ -361,7 +367,7 @@ function initializeAnimations() {
         const animatedElements = document.querySelectorAll(
             '.interest-card, .publication-item, .course-card, .project-card, .contact-item, .social-link'
         );
-        
+
         animatedElements.forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(20px)';
@@ -372,10 +378,10 @@ function initializeAnimations() {
 
     // Add loading animation for images
     document.querySelectorAll('img').forEach(img => {
-        img.addEventListener('load', function() {
+        img.addEventListener('load', function () {
             this.style.opacity = '1';
         });
-        
+
         // If image is already cached
         if (img.complete) {
             img.style.opacity = '1';
@@ -413,7 +419,7 @@ function showErrorMessage(message) {
 }
 
 // Add click handlers for publication links
-document.addEventListener('click', function(e) {
+document.addEventListener('click', function (e) {
     if (e.target.classList.contains('pub-link') && e.target.textContent === 'BibTeX') {
         e.preventDefault();
         showBibTeXModal(e.target);
@@ -449,7 +455,7 @@ function initializeSearch() {
 function performSearch() {
     const query = document.getElementById('search-input').value.toLowerCase().trim();
     const resultsContainer = document.getElementById('search-results');
-    
+
     if (query.length < 2) {
         resultsContainer.innerHTML = '';
         return;
@@ -459,7 +465,7 @@ function performSearch() {
 
     // Search publications
     publicationsData.forEach((pub, index) => {
-        if (pub.title.toLowerCase().includes(query) || 
+        if (pub.title.toLowerCase().includes(query) ||
             pub.authors.some(author => author.toLowerCase().includes(query)) ||
             pub.venue.toLowerCase().includes(query)) {
             results.push({
@@ -473,7 +479,7 @@ function performSearch() {
 
     // Search projects
     projectsData.forEach((project, index) => {
-        if (project.title.toLowerCase().includes(query) || 
+        if (project.title.toLowerCase().includes(query) ||
             project.description.toLowerCase().includes(query) ||
             project.technologies.some(tech => tech.toLowerCase().includes(query))) {
             results.push({
@@ -487,7 +493,7 @@ function performSearch() {
 
     // Search courses
     coursesData.forEach((course, index) => {
-        if (course.title.toLowerCase().includes(query) || 
+        if (course.title.toLowerCase().includes(query) ||
             course.courseCode.toLowerCase().includes(query) ||
             course.description.toLowerCase().includes(query)) {
             results.push({
@@ -515,13 +521,17 @@ function performSearch() {
 // Navigate to section
 function navigateToSection(sectionId) {
     closeSearch();
-    const target = document.getElementById(sectionId);
-    if (target) {
-        const offsetTop = target.offsetTop - 80;
-        window.scrollTo({
-            top: offsetTop,
-            behavior: 'smooth'
-        });
+    // Map section IDs to pages
+    const pageMap = {
+        'about': 'index.html',
+        'research': 'research.html',
+        'teaching': 'teaching.html',
+        'projects': 'projects.html',
+        'contact': 'contact.html'
+    };
+
+    if (pageMap[sectionId]) {
+        window.location.href = pageMap[sectionId];
     }
 }
 
@@ -548,7 +558,7 @@ document.addEventListener('keydown', (e) => {
             }
         }
     }
-    
+
     // Escape to close search
     if (e.key === 'Escape') {
         closeSearch();
@@ -581,7 +591,7 @@ function addThemeToggle() {
         z-index: 1000;
         transition: var(--transition);
     `;
-    
+
     themeToggle.addEventListener('click', toggleTheme);
     document.body.appendChild(themeToggle);
 }
@@ -591,7 +601,7 @@ function toggleTheme() {
     document.body.classList.toggle('dark-theme');
     const themeToggle = document.getElementById('theme-toggle');
     themeToggle.innerHTML = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
-    
+
     // Save theme preference
     localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light');
 }
@@ -613,7 +623,7 @@ window.addEventListener('load', () => {
         const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
         console.log(`Website loaded in ${loadTime}ms`);
     }
-    
+
     // Initialize optional features
     addThemeToggle(); // Uncomment to add theme toggle
     loadSavedTheme(); // Uncomment to enable theme persistence

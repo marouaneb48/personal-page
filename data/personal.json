@@ -3,15 +3,11 @@
   "title": "Ph.D. Student & Assistant Professor at CentraleSupélec",
   "heroTitle": "Welcome to My Academic Portfolio",
   "heroSubtitle": "Exploring the intersection of artificial intelligence, finance, and fundraising",
-  
   "bio": [
     "I am a Ph.D. student at the Laboratoire des signaux et systèmes (L2S), CentraleSupélec, within the ILOCOS team. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics and advanced machine learning approaches for financial modeling.",
-    
     "Alongside my doctoral research, I am an Assistant Professor at CentraleSupélec, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications.",
-    
     "I am passionate about leveraging AI and quantitative models to better understand financial behaviors, improve fundraising mechanisms, and develop data-driven tools with societal impact."
   ],
-
   "education": [
     {
       "degree": "Ph.D. in Computer Science",
@@ -29,7 +25,6 @@
       "year": "2018-2020"
     }
   ],
-
   "quickFacts": [
     {
       "label": "Research Focus",
@@ -48,7 +43,6 @@
       "value": "L2S Laboratory, ILOCOS Team"
     }
   ],
-
   "researchInterests": [
     {
       "icon": "fas fa-brain",
@@ -71,7 +65,6 @@
       "description": "Large-scale simulations, HPC optimization, and predictive analytics"
     }
   ],
-
   "contact": {
     "email": "marouane.battach@centralesupelec.fr",
     "office": {
@@ -80,21 +73,25 @@
       "address": "Gif-sur-Yvette, France"
     }
   },
-
   "socialLinks": [
+    {
+      "platform": "Email",
+      "icon": "fas fa-envelope",
+      "url": "mailto:marouane.battach@centralesupelec.fr"
+    },
     {
       "platform": "LinkedIn",
       "icon": "fab fa-linkedin",
       "url": "https://linkedin.com/in/marouane-battach"
     },
     {
-      "platform": "GitHub", 
+      "platform": "GitHub",
       "icon": "fab fa-github",
       "url": "https://github.com/marouanebattach"
     },
     {
       "platform": "Google Scholar",
-      "icon": "fas fa-graduation-cap", 
+      "icon": "fas fa-graduation-cap",
       "url": "https://scholar.google.com/citations?user=YOUR_ID"
     },
     {
@@ -109,18 +106,17 @@
     },
     {
       "platform": "Twitter",
-      "icon": "fab fa-twitter", 
+      "icon": "fab fa-twitter",
       "url": "https://twitter.com/YOUR_HANDLE"
     }
   ],
-
   "supervision": [
     {
       "type": "PhD Students",
       "count": 0
     },
     {
-      "type": "Master's Students", 
+      "type": "Master's Students",
       "count": 0
     },
     {
@@ -128,7 +124,6 @@
       "count": 0
     }
   ],
-
   "footer": {
     "copyright": "Marouane BATTACH",
     "lastUpdated": "September 2025"
