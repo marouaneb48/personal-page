@@ -1,78 +1,12 @@
 [
   {
     "courseCode": "CS 401",
-    "title": "Introduction to Machine Learning",
-    "semester": "Fall 2023",
-    "level": "Undergraduate",
+    "title": "Machine Learning 2.2 - CS - PARIS - SACLAY (2025-2026)",
+    "level": "Second years of Engineering program",
     "description": "Undergraduate course covering fundamental concepts in machine learning, including supervised and unsupervised learning, neural networks, and practical applications.",
-    "students": 45,
-    "schedule": "MWF 10:00-11:00",
-    "room": "CS Building 204",
-    "status": "current",
     "materials": {
       "syllabus": "assets/docs/cs401_syllabus.pdf",
       "website": "https://your-university.edu/cs401"
-    }
-  },
-
-  {
-    "courseCode": "CS 701", 
-    "title": "Advanced Natural Language Processing",
-    "semester": "Spring 2024",
-    "level": "Graduate",
-    "description": "Graduate seminar exploring cutting-edge research in NLP, including transformer architectures, language models, and evaluation methodologies.",
-    "students": 15,
-    "schedule": "TR 2:00-3:30", 
-    "room": "CS Building 314",
-    "status": "current",
-    "materials": {
-      "syllabus": "assets/docs/cs701_syllabus.pdf",
-      "website": "https://your-university.edu/cs701"
-    }
-  },
-
-  {
-    "courseCode": "CS 350",
-    "title": "Data Structures and Algorithms", 
-    "semester": "Fall 2022",
-    "level": "Undergraduate",
-    "description": "Core computer science course covering fundamental data structures, algorithm design, and complexity analysis.",
-    "students": 80,
-    "schedule": "MWF 2:00-3:00",
-    "room": "CS Building 101", 
-    "status": "past",
-    "materials": {
-      "syllabus": "assets/docs/cs350_syllabus.pdf"
-    }
-  },
-
-  {
-    "courseCode": "CS 605",
-    "title": "Research Methods in Computer Science",
-    "semester": "Spring 2023", 
-    "level": "Graduate",
-    "description": "Graduate course focusing on research methodologies, experimental design, and academic writing in computer science.",
-    "students": 20,
-    "schedule": "W 6:00-8:30",
-    "room": "CS Building 205",
-    "status": "past",
-    "materials": {
-      "syllabus": "assets/docs/cs605_syllabus.pdf"
-    }
-  },
-
-  {
-    "courseCode": "CS 499",
-    "title": "Undergraduate Research Seminar",
-    "semester": "Fall 2023",
-    "level": "Undergraduate", 
-    "description": "Independent research projects supervised by faculty members. Students work on cutting-edge research problems in their area of interest.",
-    "students": 12,
-    "schedule": "F 3:00-5:00",
-    "room": "CS Building 314",
-    "status": "current",
-    "materials": {
-      "website": "https://your-university.edu/cs499"
     }
   }
 ]
