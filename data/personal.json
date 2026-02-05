@@ -5,8 +5,7 @@
   "heroSubtitle": "Exploring the intersection of artificial intelligence, finance, and fundraising",
   "bio": [
     "I am a Ph.D. student at the Laboratoire des signaux et systèmes (L2S), CentraleSupélec, within the ILOCOS team. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics and advanced machine learning approaches for financial modeling.",
-    "Alongside my doctoral research, I am an Assistant Professor at CentraleSupélec, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications.",
-    "I am passionate about leveraging AI and quantitative models to better understand financial behaviors, improve fundraising mechanisms, and develop data-driven tools with societal impact."
+    "Alongside my doctoral research, I am an Assistant Professor at CentraleSupélec, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications."
   ],
   "education": [
     {
@@ -20,9 +19,14 @@
       "year": "2020 September - 2023 September"
     },
     {
-      "degree": "C.P.G.E (Preparatory Classes for Grandes Écoles) - MPSI/MP*",
-      "institution": "Université Hassan II de Casablanca",
-      "year": "2018-2020"
+      "degree": "C.P.G.E (Preparatory Classes for Grandes Écoles) - MP*",
+      "institution": "Lycée Henri Poincaré, Nancy",
+      "year": "2019-2020"
+    }
+    {
+      "degree": "C.P.G.E (Preparatory Classes for Grandes Écoles) - MPSI",
+      "institution": "Lycée Montesquieu, Le Mans",
+      "year": "2018-2029"
     }
   ],
   "quickFacts": [
