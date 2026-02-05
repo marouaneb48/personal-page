@@ -830,4 +830,99 @@ html {
         box-shadow: none;
         border: 1px solid #ccc;
     }
+}/* Image Slider */
+.image-slider-container {
+    position: relative;
+    width: 300px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    /* Prevent default image drag */
+    user-select: none;
+    -webkit-user-select: none;
 }
+
+.profile-img {
+    /* Existing style override */
+    width: 100%;
+    display: block;
+    pointer-events: none;
+    /* Let the container handle drag events */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.profile-img.slide-anim {
+    transition: transform 0.3s ease-out;
+}
+
+.slider-dots {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+}
+
+.slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.slider-dot.active {
+    background-color: white;
+    transform: scale(1.2);
+    width: 10px;
+}
+/* Slider Arrows */
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.7);
+    color: var(--primary-color);
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    /* Flex to center the icon */
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    /* Prevent selection of arrow text */
+    user-select: none;
+}
+
+.slider-arrow:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.prev-arrow {
+    left: 10px;
+    padding-right: 2px;
+    /* Visual optical adjustment for the character */
+}
+
+.next-arrow {
+    right: 10px;
+    padding-left: 2px;
+    /* Visual optical adjustment */
+}
+
+/* Hide arrows on touch devices to avoid clutter, or maybe keep them? 
+   Let's keep them as requested for "easy mouse button", 
+   but maybe make them slightly larger on mobile if needed.
+   For now standard size is fine. */
