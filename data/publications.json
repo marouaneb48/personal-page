@@ -1,7 +1,11 @@
 [
   {
     "title": "Advancing Neural Language Models through Contextual Understanding",
-    "authors": ["J. Smith", "A. Johnson", "B. Williams"],
+    "authors": [
+      "J. Smith",
+      "A. Johnson",
+      "B. Williams"
+    ],
     "venue": "Conference on Neural Information Processing Systems (NeurIPS)",
     "year": 2023,
     "type": "conference",
@@ -11,7 +15,7 @@
         "url": "assets/docs/paper1.pdf"
       },
       {
-        "type": "Code", 
+        "type": "Code",
         "url": "https://github.com/your-username/neural-language"
       },
       {
@@ -20,12 +24,15 @@
       }
     ],
     "abstract": "This paper introduces a novel approach to improving neural language models by incorporating advanced contextual understanding mechanisms...",
-    "featured": true
+    "featured": false
   },
-  
   {
-    "title": "Robust Machine Learning for Real-World Applications", 
-    "authors": ["J. Smith", "C. Davis", "E. Miller"],
+    "title": "Robust Machine Learning for Real-World Applications",
+    "authors": [
+      "J. Smith",
+      "C. Davis",
+      "E. Miller"
+    ],
     "venue": "International Conference on Machine Learning (ICML)",
     "year": 2023,
     "type": "conference",
@@ -39,11 +46,11 @@
         "url": "https://github.com/your-username/robust-ml"
       },
       {
-        "type": "BibTeX", 
+        "type": "BibTeX",
         "url": "#bibtex2"
       }
     ],
     "abstract": "We present a comprehensive framework for developing robust machine learning models that perform well in real-world scenarios...",
-    "featured": true
+    "featured": false
   }
 ]

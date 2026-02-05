@@ -162,10 +162,12 @@ function populateResearchSection() {
             ).join('');
 
             pubElement.innerHTML = `
-                <h4>${publication.title}</h4>
-                <p class="authors">${formattedAuthors}</p>
-                <p class="venue">${publication.venue}, ${publication.year}</p>
-                <div class="publication-links">${linksHTML}</div>
+                <div class="publication-content">
+                    <span class="pub-title"><strong>${publication.title}</strong></span>.
+                    <span class="authors">${formattedAuthors}</span>.
+                    <span class="venue"><em>${publication.venue}</em>, ${publication.year}</span>.
+                    <span class="publication-links-inline">${linksHTML}</span>
+                </div>
             `;
             publicationsList.appendChild(pubElement);
         });
@@ -293,6 +295,7 @@ function populateContactSection() {
             socialLink.className = 'social-link';
             socialLink.target = '_blank';
             socialLink.rel = 'noopener noreferrer';
+            socialLink.setAttribute('data-tooltip', link.platform);
             socialLink.innerHTML = `
                 <i class="${link.icon}"></i>
                 <span>${link.platform}</span>
