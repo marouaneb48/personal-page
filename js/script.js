@@ -641,31 +641,56 @@ window.closeSearch = closeSearch;
 window.navigateToSection = navigateToSection;
 
 // Image Slider Implementation
+// Image Slider Implementation
+// Image Slider Implementation
 function initImageSlider() {
     const sliderContainer = document.getElementById('image-slider');
     if (!sliderContainer) return;
 
-    const profileImg = document.getElementById('profile-image');
+    // Create the slider track
+    const track = document.createElement('div');
+    track.className = 'slider-track';
+
+    // Get the existing image element to preserve its place/style if needed, 
+    // but ultimately we want to move it into the track or replace it.
+    // Let's replace the single img with the track containing multiple imgs.
+    const initialImg = document.getElementById('profile-image');
+
+    // Images list
+    const images = ['image.png', 'paris.jpg'];
+    let currentIndex = 0;
+
+    // Build the track
+    images.forEach(imgSrc => {
+        const img = document.createElement('img');
+        img.src = `assets/images/${imgSrc}`;
+        img.className = 'profile-img';
+        img.draggable = false;
+        track.appendChild(img);
+    });
+
+    // Insert track before the first child (which was the image)
+    sliderContainer.insertBefore(track, initialImg);
+    // Remove the old static image
+    initialImg.remove();
+
     const dotsContainer = document.getElementById('slider-dots');
     const prevBtn = document.getElementById('prev-arrow');
     const nextBtn = document.getElementById('next-arrow');
 
-    // Images list
-    const images = ['image.png', 'paris.jpg', 'sunset.jpg'];
-    let currentIndex = 0;
-
-    // Create dots
+    // Initialize dots
+    dotsContainer.innerHTML = ''; // Clear existing
     images.forEach((_, index) => {
         const dot = document.createElement('div');
         dot.className = `slider-dot ${index === 0 ? 'active' : ''}`;
         dot.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent drag start
+            e.stopPropagation();
             goToImage(index);
         });
         dotsContainer.appendChild(dot);
     });
 
-    // Button Event Listeners
+    // Button Listeners
     if (prevBtn) {
         prevBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -682,120 +707,14 @@ function initImageSlider() {
         });
     }
 
-    // State for drag/swipe
-    let isDragging = false;
-    let startPos = 0;
-    let currentTranslate = 0;
-    let prevTranslate = 0;
-    let animationID;
-
-    // Event Listeners
-    sliderContainer.addEventListener('touchstart', touchStart);
-    sliderContainer.addEventListener('touchend', touchEnd);
-    sliderContainer.addEventListener('touchmove', touchMove);
-
-    sliderContainer.addEventListener('mousedown', touchStart);
-    sliderContainer.addEventListener('mouseup', touchEnd);
-    sliderContainer.addEventListener('mouseleave', () => {
-        if (isDragging) touchEnd();
-    });
-    sliderContainer.addEventListener('mousemove', touchMove);
-
-    // Prevent context menu on long press
-    window.oncontextmenu = function (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        return false;
-    }
-
-    function touchStart(event) {
-        // For mouse events, prevent default to avoid dragging the image element natively
-        if (event.type === 'mousedown') event.preventDefault();
-
-        isDragging = true;
-        startPos = getPositionX(event);
-        animationID = requestAnimationFrame(animation);
-        sliderContainer.style.cursor = 'grabbing';
-        profileImg.style.transition = 'none'; // Disable transition for direct follow
-    }
-
-    function touchMove(event) {
-        if (isDragging) {
-            const currentPosition = getPositionX(event);
-            currentTranslate = prevTranslate + currentPosition - startPos;
-        }
-    }
-
-    function touchEnd() {
-        isDragging = false;
-        cancelAnimationFrame(animationID);
-        sliderContainer.style.cursor = 'grab';
-
-        const movedBy = currentTranslate - prevTranslate;
-
-        // Threshold for swipe (50px)
-        // Horizontal direction: negative movedBy means dragged LEFT (next image)
-        if (movedBy < -50) {
-            if (currentIndex < images.length - 1) {
-                currentIndex += 1;
-            } else {
-                currentIndex = 0; // Loop to start
-            }
-        }
-        else if (movedBy > 50) {
-            if (currentIndex > 0) {
-                currentIndex -= 1;
-            } else {
-                currentIndex = images.length - 1; // Loop to end
-            }
-        }
-
-        goToImage(currentIndex);
-    }
-
-    function getPositionX(event) {
-        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-    }
-
-    function animation() {
-        if (isDragging) {
-            setSliderPosition();
-            requestAnimationFrame(animation);
-        }
-    }
-
-    function setSliderPosition() {
-        profileImg.style.transform = `translateX(${currentTranslate}px)`;
-    }
-
     function goToImage(index) {
         currentIndex = index;
+        track.style.transition = 'transform 0.3s ease-in-out';
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-        // Phase 1: Fade out and move out of view (optional visual cue?)
-        // actually, just fading out is cleaner given we only have one img element
-        profileImg.style.opacity = '0';
-
-        // Wait for fade out
-        setTimeout(() => {
-            // Phase 2: Switch source and reset position hidden
-            profileImg.src = `assets/images/${images[currentIndex]}`;
-            profileImg.style.transform = 'translateX(0)';
-
-            // Phase 3: Fade in
-            requestAnimationFrame(() => {
-                profileImg.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                profileImg.style.opacity = '1';
-            });
-
-            // Update dots
-            document.querySelectorAll('.slider-dot').forEach((dot, i) => {
-                dot.classList.toggle('active', i === currentIndex);
-            });
-
-            // Reset drag state
-            prevTranslate = 0;
-            currentTranslate = 0;
-
-        }, 300); // Match CSS transition time
+        // Update dots
+        document.querySelectorAll('.slider-dot').forEach((dot, i) => {
+            dot.classList.toggle('active', i === currentIndex);
+        });
     }
 }

@@ -926,3 +926,47 @@ html {
    Let's keep them as requested for "easy mouse button", 
    but maybe make them slightly larger on mobile if needed.
    For now standard size is fine. */
+/* Slider Track Refactoring */
+.image-slider-container {
+    width: 300px;
+    /* Fixed width for the viewport */
+    height: 300px;
+    /* Fixed height to match image ratio if needed, or auto */
+    margin: 0 auto;
+    overflow: hidden;
+    /* Hide overflow images */
+    border-radius: 10px;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.slider-track {
+    display: flex;
+    /* Horizontal alignment */
+    width: 100%;
+    /* Will be dynamically sized or flex handled */
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+    /* Smooth slide */
+}
+
+.profile-img {
+    width: 300px;
+    /* Match container width */
+    height: 100%;
+    /* Match container height */
+    object-fit: cover;
+    flex-shrink: 0;
+    /* Do not shrink */
+    pointer-events: none;
+    /* Remove old transition/opacity stuff */
+    transition: none;
+    opacity: 1;
+}
+
+/* Ensure arrows and dots stay on top */
+.slider-arrow,
+.slider-dots {
+    z-index: 20;
+}
