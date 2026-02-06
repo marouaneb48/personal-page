@@ -37,7 +37,7 @@ body {
     font-weight: 700;
     color: var(--primary-color);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     position: relative;
 }
 
@@ -172,14 +172,19 @@ body {
 
 /* About Section */
 .about {
-    padding: 100px 0;
+    padding-top: 110px;
+    padding-bottom: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     background: var(--light-gray);
 }
 
 .about-content {
     display: grid;
     grid-template-columns: 1fr 2fr;
-    gap: 4rem;
+    gap: 2rem;
     align-items: start;
 }
 
@@ -202,7 +207,7 @@ body {
 }
 
 .about-text p {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     font-size: 1.1rem;
     line-height: 1.7;
     color: var(--text-light);
@@ -830,7 +835,9 @@ html {
         box-shadow: none;
         border: 1px solid #ccc;
     }
-}/* Image Slider */
+}
+
+/* Image Slider */
 .image-slider-container {
     position: relative;
     width: 300px;
@@ -863,6 +870,12 @@ html {
     display: flex;
     gap: 8px;
     z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-slider-container:hover .slider-dots {
+    opacity: 1;
 }
 
 .slider-dot {
@@ -880,6 +893,7 @@ html {
     transform: scale(1.2);
     width: 10px;
 }
+
 /* Slider Arrows */
 .slider-arrow {
     position: absolute;
@@ -898,10 +912,15 @@ html {
     /* Flex to center the icon */
     align-items: center;
     justify-content: center;
+    opacity: 0;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     /* Prevent selection of arrow text */
     user-select: none;
+}
+
+.image-slider-container:hover .slider-arrow {
+    opacity: 1;
 }
 
 .slider-arrow:hover {
@@ -928,10 +947,10 @@ html {
    For now standard size is fine. */
 /* Slider Track Refactoring */
 .image-slider-container {
-    width: 300px;
-    /* Fixed width for the viewport */
-    height: 300px;
-    /* Fixed height to match image ratio if needed, or auto */
+    width: 100%;
+    max-width: 300px;
+    aspect-ratio: 3/4;
+    height: auto;
     margin: 0 auto;
     overflow: hidden;
     /* Hide overflow images */
@@ -939,24 +958,23 @@ html {
     position: relative;
     user-select: none;
     -webkit-user-select: none;
+    box-shadow: var(--shadow);
 }
 
 .slider-track {
     display: flex;
     /* Horizontal alignment */
     width: 100%;
-    /* Will be dynamically sized or flex handled */
     height: 100%;
     transition: transform 0.3s ease-in-out;
     /* Smooth slide */
 }
 
 .profile-img {
-    width: 300px;
-    /* Match container width */
+    width: 100%;
     height: 100%;
-    /* Match container height */
     object-fit: cover;
+    object-position: center top;
     flex-shrink: 0;
     /* Do not shrink */
     pointer-events: none;

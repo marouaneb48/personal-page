@@ -4,13 +4,13 @@
   "heroTitle": "Welcome to My Academic Portfolio",
   "heroSubtitle": "Exploring the intersection of artificial intelligence, finance, and fundraising",
   "bio": [
-    "I am a Ph.D. student at the Laboratoire des signaux et systèmes (L2S), CentraleSupélec, within the ILOCOS team. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics and advanced machine learning approaches for financial modeling.",
-    "Alongside my doctoral research, I am an Assistant Professor at CentraleSupélec, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications."
+    "I am a Ph.D. student at the <a href='https://l2s.centralesupelec.fr/' target='_blank'>Laboratoire des signaux et systèmes (L2S)</a>, CentraleSupélec, within the <a href='https://l2s.centralesupelec.fr/poles/telecoms-reseaux/ilocos/' target='_blank'>ILOCOS team</a>. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics and advanced machine learning approaches for financial modeling.",
+    "Alongside my doctoral research, I am an Assistant Professor at <a href='https://centralesupelec.fr/' target='_blank'>CentraleSupelec</a>, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications."
   ],
   "education": [
     {
       "degree": "Ph.D. in Computer Science",
-      "institution": "CentraleSupélec, Université Paris-Saclay",
+      "institution": "CentraleSupelec, Université Paris-Saclay",
       "year": "2023 October – 2026 October"
     },
     {

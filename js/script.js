@@ -92,7 +92,7 @@ function populateAboutSection() {
     if (bioContainer) {
         personalData.bio.forEach(paragraph => {
             const p = document.createElement('p');
-            p.textContent = paragraph;
+            p.innerHTML = paragraph;
             bioContainer.appendChild(p);
         });
     }
@@ -657,7 +657,7 @@ function initImageSlider() {
     const initialImg = document.getElementById('profile-image');
 
     // Images list
-    const images = ['image.png', 'paris.jpg'];
+    const images = ['paris.jpg', 'image.png', 'chess.png', 'tea.png'];
     let currentIndex = 0;
 
     // Build the track
