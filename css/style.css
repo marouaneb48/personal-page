@@ -429,41 +429,45 @@ body {
     opacity: 0.8;
 }
 
-.course-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-}
-
 .course-card h4 {
     color: var(--primary-color);
     font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-}
-
-.course-level {
-    background: var(--light-gray);
-    color: var(--text-color);
-    padding: 0.3rem 0.8rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.semester {
-    color: var(--secondary-color);
-    font-weight: 600;
     margin-bottom: 1rem;
 }
 
-.course-info {
+.course-card p {
+    color: var(--text-color);
+    margin-bottom: 0;
+}
+
+.course-materials {
     display: flex;
-    gap: 2rem;
-    margin-top: 1rem;
-    color: var(--text-light);
-    font-size: 0.9rem;
     flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.course-material-link {
+    background: var(--light-gray);
+    border-radius: 15px;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    padding: 0.45rem 0.85rem;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.course-material-link:hover {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.course-source-error {
+    background: white;
+    border-left: 4px solid var(--accent-color);
+    color: var(--text-light);
+    margin: 0;
+    padding: 1rem;
 }
 
 
@@ -767,11 +771,6 @@ body {
 
     .nav-container {
         padding: 1rem 15px;
-    }
-
-    .course-info {
-        flex-direction: column;
-        gap: 0.5rem;
     }
 
     .project-links {

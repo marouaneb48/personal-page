@@ -2,6 +2,7 @@
 let personalData = {};
 let publicationsData = [];
 let coursesData = [];
+let courseLoadErrors = [];
 let projectsData = [];
 
 // Initialize the website
@@ -31,10 +32,7 @@ async function loadAllData() {
                 if (!response.ok) throw new Error(`Failed to load publications data: ${response.status}`);
                 return response.json();
             }),
-            fetch('data/courses.json?v=' + new Date().getTime()).then(response => {
-                if (!response.ok) throw new Error(`Failed to load courses data: ${response.status}`);
-                return response.json();
-            }),
+            loadCoursesData(),
             fetch('data/projects.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load projects data: ${response.status}`);
                 return response.json();
@@ -48,6 +46,158 @@ async function loadAllData() {
     } catch (error) {
         throw new Error(`Data loading failed: ${error.message}`);
     }
+}
+
+// Load course manifests from local folders or GitHub repositories
+async function loadCoursesData() {
+    const response = await fetch('data/courses.json?v=' + new Date().getTime());
+    if (!response.ok) throw new Error(`Failed to load courses data: ${response.status}`);
+
+    const courseSources = await response.json();
+    if (!Array.isArray(courseSources)) throw new Error('Courses data must be an array');
+
+    courseLoadErrors = [];
+    const courseResults = await Promise.all(courseSources.map(async courseSource => {
+        try {
+            return await loadCourseSource(courseSource);
+        } catch (error) {
+            console.error('Failed to load course source:', courseSource, error);
+            courseLoadErrors.push(error.message);
+            return null;
+        }
+    }));
+
+    return courseResults.filter(Boolean);
+}
+
+async function loadCourseSource(courseSource) {
+    if (isCourseManifest(courseSource)) {
+        return normalizeCourseManifest(courseSource);
+    }
+
+    if (typeof courseSource === 'string') {
+        if (isGithubUrl(courseSource)) {
+            return loadGithubCourseManifest({ github: courseSource });
+        }
+
+        return loadLocalCourseManifest(courseSource);
+    }
+
+    if (courseSource && typeof courseSource === 'object') {
+        if (courseSource.github) {
+            return loadGithubCourseManifest(courseSource);
+        }
+
+        if (courseSource.path) {
+            return loadLocalCourseManifest(courseSource.path);
+        }
+    }
+
+    throw new Error('Each course entry must be a course manifest, folder path, or GitHub source');
+}
+
+async function loadLocalCourseManifest(folderPath) {
+    const manifestUrl = new URL(`${trimSlashes(folderPath)}/course.json`, document.baseURI);
+    const response = await fetch(manifestUrl);
+    if (!response.ok) throw new Error(`Failed to load local course manifest: ${folderPath}`);
+
+    return normalizeCourseManifest(await response.json(), manifestUrl);
+}
+
+async function loadGithubCourseManifest(courseSource) {
+    const repository = parseGithubRepository(courseSource.github);
+    const coursePath = courseSource.path ? `${trimSlashes(courseSource.path)}/` : '';
+    const manifestPath = `${coursePath}course.json`;
+    const encodedPath = manifestPath.split('/').map(encodeURIComponent).join('/');
+    const apiUrl = new URL(`https://api.github.com/repos/${repository.owner}/${repository.repo}/contents/${encodedPath}`);
+
+    if (courseSource.ref) {
+        apiUrl.searchParams.set('ref', courseSource.ref);
+    }
+
+    const response = await fetch(apiUrl, {
+        headers: {
+            Accept: 'application/vnd.github+json'
+        }
+    });
+    if (!response.ok) throw new Error(`Failed to load GitHub course manifest: ${repository.owner}/${repository.repo}`);
+
+    const manifestFile = await response.json();
+    if (!manifestFile.content || manifestFile.encoding !== 'base64') {
+        throw new Error(`GitHub course manifest is not a readable file: ${manifestPath}`);
+    }
+
+    const manifestText = decodeBase64Text(manifestFile.content);
+    const manifestUrl = manifestFile.html_url || manifestFile.download_url || apiUrl;
+    return normalizeCourseManifest(JSON.parse(manifestText), manifestUrl);
+}
+
+function normalizeCourseManifest(course, manifestUrl) {
+    if (!isCourseManifest(course)) {
+        throw new Error('Course manifests require courseCode, title, and description');
+    }
+
+    return {
+        ...course,
+        status: course.status || 'current',
+        materials: resolveCourseMaterials(course.materials, manifestUrl)
+    };
+}
+
+function isCourseManifest(course) {
+    return Boolean(
+        course &&
+        typeof course === 'object' &&
+        typeof course.courseCode === 'string' &&
+        typeof course.title === 'string' &&
+        typeof course.description === 'string'
+    );
+}
+
+function resolveCourseMaterials(materials, manifestUrl) {
+    if (!materials || !manifestUrl) return materials || {};
+
+    return Object.fromEntries(Object.entries(materials).map(([label, url]) => {
+        if (typeof url !== 'string') return [label, url];
+        return [label, new URL(url, manifestUrl).href];
+    }));
+}
+
+function parseGithubRepository(repositoryValue) {
+    if (typeof repositoryValue !== 'string') {
+        throw new Error('GitHub course sources require a repository');
+    }
+
+    const repositoryPath = isGithubUrl(repositoryValue) ?
+        new URL(repositoryValue).pathname :
+        repositoryValue;
+    const [owner, repo] = repositoryPath.replace(/^\/|\/$/g, '').split('/');
+
+    if (!owner || !repo) {
+        throw new Error('GitHub course repositories must use owner/repo or a GitHub repository URL');
+    }
+
+    return {
+        owner: encodeURIComponent(owner),
+        repo: encodeURIComponent(repo.replace(/\.git$/, ''))
+    };
+}
+
+function isGithubUrl(value) {
+    try {
+        return new URL(value).hostname === 'github.com';
+    } catch (error) {
+        return false;
+    }
+}
+
+function trimSlashes(value) {
+    return String(value).replace(/\/+$/, '');
+}
+
+function decodeBase64Text(value) {
+    const bytes = Uint8Array.from(atob(value.replace(/\s/g, '')), character => character.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
 }
 
 // Populate all content on the page
@@ -184,25 +334,14 @@ function populateTeachingSection() {
     if (coursesGrid) {
         const currentCourses = coursesData.filter(course => course.status === 'current');
         currentCourses.forEach(course => {
-            const courseCard = document.createElement('div');
-            courseCard.className = `course-card ${course.status}`;
+            coursesGrid.appendChild(createCourseCard(course));
+        });
 
-            courseCard.innerHTML = `
-                <div class="course-header">
-                    <div>
-                        <h4>${course.courseCode}: ${course.title}</h4>
-                        <div class="course-level">${course.level}</div>
-                    </div>
-                </div>
-                <p class="semester">${course.semester}</p>
-                <p>${course.description}</p>
-                <div class="course-info">
-                    <span><i class="fas fa-users"></i> ${course.students} students</span>
-                    <span><i class="fas fa-clock"></i> ${course.schedule}</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ${course.room}</span>
-                </div>
-            `;
-            coursesGrid.appendChild(courseCard);
+        courseLoadErrors.forEach(error => {
+            const errorMessage = document.createElement('p');
+            errorMessage.className = 'course-source-error';
+            errorMessage.textContent = error;
+            coursesGrid.appendChild(errorMessage);
         });
     }
 
@@ -217,6 +356,61 @@ function populateTeachingSection() {
             `;
             supervisionStats.appendChild(statCard);
         });
+    }
+}
+
+function createCourseCard(course) {
+    const courseCard = document.createElement('div');
+    courseCard.className = `course-card ${course.status}`;
+
+    const title = document.createElement('h4');
+    title.textContent = course.title;
+    courseCard.appendChild(title);
+    appendCourseParagraph(courseCard, course.description);
+
+    const materialLinks = createCourseMaterialLinks(course.materials);
+    if (materialLinks) courseCard.appendChild(materialLinks);
+
+    return courseCard;
+}
+
+function appendCourseParagraph(container, text, className) {
+    if (!text) return;
+
+    const paragraph = document.createElement('p');
+    if (className) paragraph.className = className;
+    paragraph.textContent = text;
+    container.appendChild(paragraph);
+}
+
+function createCourseMaterialLinks(materials) {
+    const materialEntries = [
+        ['Course page', materials?.overview || materials?.website],
+        ['Syllabus', materials?.syllabus]
+    ].filter(([, url]) => isSafeCourseUrl(url));
+    if (!materialEntries.length) return null;
+
+    const links = document.createElement('div');
+    links.className = 'course-materials';
+
+    materialEntries.forEach(([label, url]) => {
+        const link = document.createElement('a');
+        link.className = 'course-material-link';
+        link.href = url;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = label;
+        links.appendChild(link);
+    });
+
+    return links;
+}
+
+function isSafeCourseUrl(value) {
+    try {
+        return ['http:', 'https:'].includes(new URL(value, document.baseURI).protocol);
+    } catch (error) {
+        return false;
     }
 }
 

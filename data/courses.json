@@ -1,12 +1,3 @@
 [
-  {
-    "courseCode": "CS 401",
-    "title": "Machine Learning 2.2 - CS - PARIS - SACLAY (2025-2026)",
-    "level": "Second years of Engineering program",
-    "description": "Undergraduate course covering fundamental concepts in machine learning, including supervised and unsupervised learning, neural networks, and practical applications.",
-    "materials": {
-      "syllabus": "assets/docs/cs401_syllabus.pdf",
-      "website": "https://your-university.edu/cs401"
-    }
-  }
+  "https://github.com/marouaneb48/CS-ML-2.2"
 ]

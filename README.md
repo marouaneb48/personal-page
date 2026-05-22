@@ -15,6 +15,10 @@ your-repo/
 │   ├── publications.json
 │   ├── courses.json
 │   └── projects.json
+├── courses/
+│   └── your-course/
+│       ├── course.json
+│       └── (course files here)
 ├── assets/
 │   ├── images/
 │   │   └── profile.jpg  ← ADD YOUR PHOTO HERE
@@ -83,7 +87,23 @@ Add your publications like this:
 
 ### 3. Teaching (`data/courses.json`)
 
-Add courses like this:
+Put each course in its own folder and list only that folder in `data/courses.json`:
+```json
+[
+  "courses/your-course"
+]
+```
+
+The page loads `courses/your-course/course.json`. Keep the manifest and any linked course files in that folder:
+```
+courses/your-course/
+├── course.json
+├── syllabus.pdf
+└── slides/
+    └── week-01.pdf
+```
+
+Create `course.json` like this:
 ```json
 {
   "courseCode": "CS 101",
@@ -92,13 +112,46 @@ Add courses like this:
   "level": "Undergraduate",
   "description": "Course description...",
   "students": 45,
+  "schedule": "MWF 10:00-11:00",
+  "room": "Room 204",
+  "materials": {
+    "syllabus": "syllabus.pdf",
+    "weekOneSlides": "slides/week-01.pdf",
+    "website": "https://your-university.edu/cs101"
+  },
   "status": "current"
 }
 ```
 
+Material paths in a folder manifest are relative to that course folder. This static website cannot read an arbitrary operating-system folder path; the folder must be part of the site or served from a URL after deployment.
+
 **Status options:**
 - `"current"` - Currently teaching
 - `"past"` - Previously taught
+
+Inline course objects in `data/courses.json` still work, but folder manifests keep each course and its files together.
+
+#### GitHub course repositories
+
+For a public GitHub repository with `course.json` in its root, paste the repository URL in `data/courses.json`:
+```json
+[
+  "https://github.com/your-name/your-course-repo"
+]
+```
+
+For an `owner/repo` value, a branch, tag, commit, or a course folder inside a repository, use an object:
+```json
+[
+  {
+    "github": "your-name/teaching-materials",
+    "path": "courses/cs101",
+    "ref": "spring-2026"
+  }
+]
+```
+
+The GitHub source must expose the same `course.json` manifest. This page reads public repository manifests through GitHub's contents API; private repositories need an authenticated backend or a deployed public course URL instead.
 
 ### 4. Projects (`data/projects.json`)
 
@@ -156,11 +209,11 @@ Edit `css/style.css` at the top:
 ```
 
 ### Course Materials
-1. Add syllabi to `assets/docs/`
-2. Reference in `courses.json`:
+1. Add syllabi or slides to the course folder
+2. Reference them from that folder's `course.json`:
 ```json
 "materials": {
-  "syllabus": "assets/docs/course-syllabus.pdf"
+  "syllabus": "course-syllabus.pdf"
 }
 ```
 
