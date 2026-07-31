@@ -4,8 +4,8 @@
   "heroTitle": "Welcome to My Academic Portfolio",
   "heroSubtitle": "Exploring the intersection of artificial intelligence, finance, and fundraising",
   "bio": [
-    "I am a Ph.D. student at the <a href='https://l2s.centralesupelec.fr/' target='_blank'>Laboratoire des signaux et systèmes (L2S)</a>, CentraleSupélec, within the <a href='https://l2s.centralesupelec.fr/poles/telecoms-reseaux/ilocos/' target='_blank'>ILOCOS team</a>. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics and advanced machine learning approaches for financial modeling.",
-    "Alongside my doctoral research, I am an Assistant Professor at <a href='https://centralesupelec.fr/' target='_blank'>CentraleSupelec</a>, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI, with the aim of bridging theoretical advances and practical financial applications."
+    "I am a Ph.D. student at the <a href='https://l2s.centralesupelec.fr/' target='_blank'>Laboratoire des signaux et systèmes (L2S)</a>, CentraleSupélec, within the <a href='https://l2s.centralesupelec.fr/poles/telecoms-reseaux/ilocos/' target='_blank'>ILOCOS team</a>. My research focuses on artificial intelligence applications in finance and fundraising, particularly on crowdfunding dynamics.",
+    "Alongside my doctoral research, I am an Assistant Professor at <a href='https://centralesupelec.fr/' target='_blank'>CentraleSupelec</a>, where I contribute to teaching and mentoring in computer science and data science. My academic work lies at the intersection of finance, mathematics, and AI"
   ],
   "education": [
     {
@@ -32,11 +32,7 @@
   "quickFacts": [
     {
       "label": "Research Focus",
-      "value": "AI for Finance, Crowdfunding, and Quantitative Modeling"
-    },
-    {
-      "label": "Publications",
-      "value": "Working papers & conference submissions (ongoing)"
+      "value": "AI for Finance and Crowdfunding"
     },
     {
       "label": "Teaching",
@@ -45,28 +41,6 @@
     {
       "label": "Affiliation",
       "value": "L2S Laboratory, ILOCOS Team"
-    }
-  ],
-  "researchInterests": [
-    {
-      "icon": "fas fa-brain",
-      "title": "Machine Learning & AI",
-      "description": "Deep learning, Hawkes processes, and explainable AI in finance"
-    },
-    {
-      "icon": "fas fa-chart-line",
-      "title": "Quantitative Finance",
-      "description": "Asset pricing, backtesting, and financial econometrics"
-    },
-    {
-      "icon": "fas fa-university",
-      "title": "Crowdfunding & Fundraising",
-      "description": "Modeling success factors in online fundraising platforms"
-    },
-    {
-      "icon": "fas fa-database",
-      "title": "Data Science",
-      "description": "Large-scale simulations, HPC optimization, and predictive analytics"
     }
   ],
   "contact": {

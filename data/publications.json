@@ -1,56 +1,44 @@
 [
   {
-    "title": "Advancing Neural Language Models through Contextual Understanding",
+    "title": "Learn, Predict and Reschedule: Toward a Data-Driven Crowdfunding Platform Management",
     "authors": [
-      "J. Smith",
-      "A. Johnson",
-      "B. Williams"
+      "Marouane Battach",
+      "Salah-Eddine Elayoubi",
+      "Tania Jimenez",
+      "Linda Salahaldin"
     ],
-    "venue": "Conference on Neural Information Processing Systems (NeurIPS)",
-    "year": 2023,
-    "type": "conference",
+    "venue": "IEEE Transactions on Engineering Management",
+    "year": 2026,
+    "type": "journal",
     "links": [
       {
         "type": "PDF",
-        "url": "assets/docs/paper1.pdf"
-      },
-      {
-        "type": "Code",
-        "url": "https://github.com/your-username/neural-language"
-      },
-      {
-        "type": "BibTeX",
-        "url": "#bibtex1"
+        "url": "https://ieeexplore.ieee.org/iel8/17/11304260/11599662.pdf"
       }
     ],
-    "abstract": "This paper introduces a novel approach to improving neural language models by incorporating advanced contextual understanding mechanisms...",
-    "featured": false
-  },
-  {
-    "title": "Robust Machine Learning for Real-World Applications",
-    "authors": [
-      "J. Smith",
-      "C. Davis",
-      "E. Miller"
-    ],
-    "venue": "International Conference on Machine Learning (ICML)",
-    "year": 2023,
-    "type": "conference",
-    "links": [
-      {
-        "type": "PDF",
-        "url": "assets/docs/paper2.pdf"
-      },
-      {
-        "type": "Code",
-        "url": "https://github.com/your-username/robust-ml"
-      },
-      {
-        "type": "BibTeX",
-        "url": "#bibtex2"
-      }
-    ],
-    "abstract": "We present a comprehensive framework for developing robust machine learning models that perform well in real-world scenarios...",
+    "abstract": "As the crowdfunding industry grows increasingly competitive, platform managers lack systematic, data-driven tools to move beyond ad hoc decision-making toward an informed management of their platforms. We propose a crowdfunding platform management framework that leverages machine learning and data analytics to enhance the aggregate success rate. In particular, we provide managers with an explainable artificial intelligence tool that links success to key parameters of the platform's state. We compare several machine learning algorithms and combine correlation analysis using SHAP with Granger causality testing to identify the most influential and actionable parameters. The management framework builds on this explainable AI analysis for controlling the success rate: a predictor forecasts the platform state, while a controller proposes an optimized campaign launch schedule to increase the aggregate success rate. We demonstrate the performance of a controller based on a genetic algorithm using a large-scale simulator built on real platform data. The results illustrate how explainable and actionable AI enables platform managers to understand platform dynamics and control them for improved performance.",
     "featured": false
   }
+,
+  {
+    "title": "Do Lenders Target Specific Causes on Pro-Social Crowdfunding Platforms?",
+    "authors": [
+      "Marouane Battach",
+      "Linda Salahaldin",
+      "Salah Elayoubi",
+      "Tien-Dat Nguyen"
+    ],
+    "venue": "SSRN",
+    "year": 2025,
+    "type": "preprint",
+    "links": [
+      {
+        "type": "PDF",
+        "url": "https://papers.ssrn.com/sol3/Delivery.cfm/3cf116f0-1cea-4257-bd64-df2412cfc953-MECA.pdf?abstractid=5280440&mirid=1&type=2"
+      }
+    ],
+    "abstract": "This paper examines whether lenders on pro-social crowdfunding platforms consistently support particular social causes or select projects without a strong category preference. Using lending data from Kiva, the authors represent relationships between lenders and project categories as dynamic bipartite graphs and compare observed similarity patterns with simulations of random lending behavior. The results suggest that lenders are generally indifferent to project categories. Less-active lenders show somewhat less random behavior, with some avoidance patterns and greater interest in productive sectors and prominent social causes.",
+    "featured": false
+  }
+
 ]

@@ -1,37 +1,41 @@
 [
   {
-    "title": "LanguageAI Toolkit",
-    "status": "active",
-    "description": "An open-source toolkit for developing and evaluating natural language processing models with a focus on interpretability and fairness.",
-    "longDescription": "The LanguageAI Toolkit provides researchers and practitioners with a comprehensive set of tools for building, training, and evaluating NLP models. It includes modules for data preprocessing, model training, evaluation metrics, and visualization of results.",
-    "technologies": ["Python", "PyTorch", "Hugging Face", "Streamlit"],
-    "links": [
-      {
+  "title": "CEMRACS 2026",
+  "status": "completed",
+  "description": "A research project focused on generating high-temporal-resolution climate and energy data from coarse climate model outputs using stochastic diffusion processes.",
+  "longDescription": "Climate model outputs such as temperature and wind speed are generally available at daily temporal resolution, while applications such as wind-generation forecasting, electricity-system analysis, and energy-price simulation often require hourly data. This project proposes modeling the variable of interest with a stochastic differential equation and developing methods to estimate its drift and volatility parameters. It also aims to simulate higher-resolution trajectories conditional on observed daily minimum, maximum, and average values.",
+  "domain": "Climatology & Energy Economics",
+  "technologies": [
+    "Stochastic Differential Equations",
+    "Diffusion Processes",
+    "Parametric Estimation",
+    "Conditional Simulation",
+    "Climate Modeling"
+  ],
+  "links": [
+     {
         "type": "GitHub",
         "icon": "fab fa-github",
-        "url": "https://github.com/your-username/languageai-toolkit"
-      },
-      {
-        "type": "Demo", 
-        "icon": "fas fa-external-link-alt",
-        "url": "https://languageai-demo.herokuapp.com"
-      },
-      {
-        "type": "Paper",
-        "icon": "fas fa-file-alt",
-        "url": "assets/docs/languageai_paper.pdf"
-      },
-      {
-        "type": "Documentation",
-        "icon": "fas fa-book",
-        "url": "https://languageai-toolkit.readthedocs.io"
+        "url": "https://github.com/marouaneb48/Cemracs-Downscaling_Climate_Data"
       }
-    ],
-    "funding": "NSF Grant #123456",
-    "startDate": "2022-09",
-    "collaborators": ["University of ABC", "Tech Company XYZ"],
-    "featured": true
-  },
+  ],
+  "funding": "EDF + FIME + MIRTE",
+
+  "objectives": [
+    "Estimate the drift and volatility functions of the diffusion process",
+    "Generate hourly simulations from daily climate-model observations",
+    "Condition simulations on observed daily minimum, maximum, and average values",
+    "Support climate-impact and energy-market scenario analysis",
+    "Potentially extend the method to multidimensional processes"
+  ],
+  "applications": [
+    "Wind-generation forecasting",
+    "Electricity supply-demand analysis",
+    "Hourly energy-price simulation",
+    "Climate-impact studies"
+  ],
+  "featured": true
+},
 
   {
     "title": "Neural Text Analytics Platform",
