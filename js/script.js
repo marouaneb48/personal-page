@@ -208,7 +208,6 @@ function populateContent() {
     populateTeachingSection();
     populateProjectsSection();
     populateContactSection();
-    populateFooter();
 }
 
 // Populate personal information in header and hero
@@ -498,14 +497,6 @@ function populateContactSection() {
             socialLinksGrid.appendChild(socialLink);
         });
     }
-}
-
-// Populate footer
-function populateFooter() {
-    document.getElementById('footer-copyright').textContent =
-        `© 2023 ${personalData.footer.copyright}. All rights reserved.`;
-    document.getElementById('footer-updated').textContent =
-        `Last updated: ${personalData.footer.lastUpdated}`;
 }
 
 // Initialize navigation functionality
