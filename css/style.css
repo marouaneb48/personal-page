@@ -973,10 +973,13 @@ html {
     /* Visual optical adjustment */
 }
 
-/* Hide arrows on touch devices to avoid clutter, or maybe keep them? 
-   Let's keep them as requested for "easy mouse button", 
-   but maybe make them slightly larger on mobile if needed.
-   For now standard size is fine. */
+/* Touch devices have no hover state, so keep controls visible always */
+@media (hover: none) {
+    .slider-arrow,
+    .slider-dots {
+        opacity: 1;
+    }
+}
 /* Slider Track Refactoring */
 .image-slider-container {
     width: 100%;

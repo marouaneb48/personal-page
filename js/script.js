@@ -23,6 +23,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 // Load all JSON data files
 async function loadAllData() {
     try {
+        const needsCourses = Boolean(document.getElementById('courses-grid'));
+
         const [personal, publications, courses, projects] = await Promise.all([
             fetch('data/personal.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load personal data: ${response.status}`);
@@ -32,7 +34,7 @@ async function loadAllData() {
                 if (!response.ok) throw new Error(`Failed to load publications data: ${response.status}`);
                 return response.json();
             }),
-            loadCoursesData(),
+            needsCourses ? loadCoursesData() : Promise.resolve([]),
             fetch('data/projects.json?v=' + new Date().getTime()).then(response => {
                 if (!response.ok) throw new Error(`Failed to load projects data: ${response.status}`);
                 return response.json();
@@ -298,13 +300,7 @@ function populateResearchSection() {
             const pubElement = document.createElement('div');
             pubElement.className = `publication-item ${publication.featured ? 'featured' : ''}`;
 
-            // Format authors (highlight current author)
-            const formattedAuthors = publication.authors.map(author => {
-                if (author.includes('Smith')) { // Replace with logic to detect your name
-                    return `<strong>${author}</strong>`;
-                }
-                return author;
-            }).join(', ');
+            const formattedAuthors = publication.authors.join(', ');
 
             // Create links
             const linksHTML = publication.links.map(link =>
@@ -842,7 +838,7 @@ function initImageSlider() {
     const initialImg = document.getElementById('profile-image');
 
     // Images list
-    const images = ['paris.jpg', 'image.png', 'chess.png', 'tea.png'];
+    const images = ['paris.jpg', 'image.jpg', 'chess.jpg', 'tea.jpg'];
     let currentIndex = 0;
 
     // Build the track

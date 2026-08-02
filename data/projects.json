@@ -35,35 +35,5 @@
     "Climate-impact studies"
   ],
   "featured": true
-},
-
-  {
-    "title": "Neural Text Analytics Platform",
-    "status": "completed", 
-    "description": "A comprehensive framework for analyzing large-scale text data using state-of-the-art deep learning models and visualization techniques.",
-    "longDescription": "This platform enables researchers to perform advanced text analytics on large datasets. It includes tools for topic modeling, sentiment analysis, entity recognition, and interactive visualization of results.",
-    "technologies": ["TensorFlow", "D3.js", "Flask", "MongoDB"],
-    "links": [
-      {
-        "type": "GitHub",
-        "icon": "fab fa-github",
-        "url": "https://github.com/your-username/neural-text-analytics"
-      },
-      {
-        "type": "Live App",
-        "icon": "fas fa-external-link-alt", 
-        "url": "https://neural-text-analytics.herokuapp.com"
-      },
-      {
-        "type": "Case Study",
-        "icon": "fas fa-chart-bar",
-        "url": "assets/docs/text_analytics_case_study.pdf"
-      }
-    ],
-    "funding": "Industry Partnership with DataCorp",
-    "startDate": "2021-01",
-    "endDate": "2022-08",
-    "collaborators": ["DataCorp Research Division"],
-    "featured": true
-  }
+}
 ]
